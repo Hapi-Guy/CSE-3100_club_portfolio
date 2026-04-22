@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scroll Tri-Fold Animation</title>
+</head>
+<body>
+  <header class="intro">
+    <h1>Scroll to Unfold</h1>
+  </header>
+
+  <div class="spacer" aria-hidden="true"></div>
+
+  <section class="scene" id="scene" aria-label="Scroll animation scene">
+    <div class="stage">
+      <div class="fold" id="fold">
+        <div class="panel left" id="left" aria-hidden="true"></div>
+        <div class="panel center" id="center" aria-hidden="true"></div>
+        <div class="panel right" id="right" aria-hidden="true"></div>
+        <div class="edge-shadow left" aria-hidden="true"></div>
+        <div class="edge-shadow right" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="spacer" aria-hidden="true"></div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
