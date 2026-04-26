@@ -1,0 +1,150 @@
+:root {
+  --panel-width: 140px;
+  --panel-height: 320px;
+  --line-width: 6px;
+
+  --bg-top: #ffffff;
+  --bg-bottom: #edf6ff;
+  --panel-main: #bfe6ff;
+  --panel-light: #e9f7ff;
+  --panel-border: rgba(0, 0, 0, 0.08);
+  --line-color: #111111;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: #1a2433;
+  background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+}
+
+.intro {
+  min-height: 28vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.intro h1 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+}
+
+.intro p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.spacer {
+  height: 60vh;
+}
+
+.scene {
+  height: 220vh;
+  position: relative;
+}
+
+.stage {
+  position: sticky;
+  top: calc(50vh - (var(--panel-height) / 2));
+  height: var(--panel-height);
+  display: grid;
+  place-items: center;
+  perspective: 1400px;
+}
+
+.fold {
+  width: calc(var(--panel-width) * 3);
+  height: var(--panel-height);
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.panel {
+  position: absolute;
+  top: 0;
+  width: var(--panel-width);
+  height: var(--panel-height);
+  border: 1px solid var(--panel-border);
+  background: linear-gradient(180deg, var(--panel-main), var(--panel-light));
+  box-shadow: 0 10px 26px rgba(12, 22, 42, 0.1), 0 3px 8px rgba(12, 22, 42, 0.07);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, box-shadow, clip-path;
+  overflow: hidden;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent 25%);
+  pointer-events: none;
+}
+
+.center {
+  left: var(--panel-width);
+  background: linear-gradient(180deg, #d9f2ff, var(--panel-main));
+  transform-origin: 50% 0%;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.left {
+  left: 0;
+  transform-origin: 100% 50%;
+}
+
+.right {
+  left: calc(var(--panel-width) * 2);
+  transform-origin: 0% 50%;
+}
+
+.edge-shadow {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 14px;
+  pointer-events: none;
+  opacity: 0.45;
+  z-index: 5;
+}
+
+.edge-shadow.left {
+  left: calc(var(--panel-width) - 7px);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0));
+}
+
+.edge-shadow.right {
+  left: calc((var(--panel-width) * 2) - 7px);
+  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0));
+}
+
+/* Optional tiny paper-tint for side faces during fold */
+.left,
+.right {
+  background-image: linear-gradient(180deg, #bce3ff, #e8f6ff);
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  :root {
+    --panel-width: 105px;
+    --panel-height: 255px;
+    --line-width: 5px;
+  }
+
+  .scene {
+    height: 240vh;
+  }
+
+  .spacer {
+    height: 50vh;
+  }
+}
