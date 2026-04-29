@@ -1,31 +1,321 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Scroll Tri-Fold Animation</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CADers – Computer Aided Designers</title>
+  <meta name="description" content="CADers is a university club dedicated to Computer-Aided Design, promoting engineering language among students and producing quality designers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="intro">
-    <h1>Scroll to Unfold</h1>
-  </header>
 
-  <div class="spacer" aria-hidden="true"></div>
+  <!-- ═══════════════════ QUOTE INTRO OVERLAY ═══════════════════ -->
+  <div id="quote-overlay" class="quote-overlay">
+    <div class="quote-content">
+      <p class="quote-text" id="quote-text">
+        "Design is not just what it looks like and feels like.<br />
+        Design is how it works."
+      </p>
+      <span class="quote-author" id="quote-author">– Steve Jobs</span>
+    </div>
+  </div>
 
-  <section class="scene" id="scene" aria-label="Scroll animation scene">
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="nav-logo">
+      <img src="Cader.png" alt="CADers Logo" class="nav-logo-img" />
+      <span>CADers</span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════ HERO / FOLD ANIMATION ═══════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <h1 class="hero-title" id="hero-title">
+        <span class="hero-line">We Are</span>
+        <span class="hero-line accent">CADers</span>
+      </h1>
+      <p class="hero-sub" id="hero-sub">Computer Aided Designers · KUET</p>
+    </div>
+  </section>
+
+  <!-- Scroll spacer for fold animation -->
+  <div class="fold-spacer" aria-hidden="true"></div>
+
+  <!-- Fold animation scene -->
+  <section class="scene" id="scene" aria-label="Scroll fold animation">
     <div class="stage">
-      <div class="fold" id="fold">
-        <div class="panel left" id="left" aria-hidden="true"></div>
-        <div class="panel center" id="center" aria-hidden="true"></div>
-        <div class="panel right" id="right" aria-hidden="true"></div>
-        <div class="edge-shadow left" aria-hidden="true"></div>
-        <div class="edge-shadow right" aria-hidden="true"></div>
+      <div class="fold-container" id="fold">
+        <div class="panel panel-left" id="panel-left"></div>
+        <div class="panel panel-center" id="panel-center"></div>
+        <div class="panel panel-right" id="panel-right"></div>
+        <div class="edge-shadow edge-left" aria-hidden="true"></div>
+        <div class="edge-shadow edge-right" aria-hidden="true"></div>
+        <!-- Logo reveal -->
+        <div class="logo-reveal" id="logo-reveal">
+          <img src="Cader.png" alt="CADers Logo" />
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="spacer" aria-hidden="true"></div>
+  <div class="fold-spacer-bottom" aria-hidden="true"></div>
 
-  <script src="script.js" defer></script>
+  <!-- ═══════════════════ ABOUT ═══════════════════ -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// WHO WE ARE</span>
+        <h2 class="section-title">About <span class="accent">CADers</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            <strong>CADers</strong> — short for <em>Computer Aided Designers</em> — is the premier CAD club at
+            Khulna University of Engineering &amp; Technology (KUET). Our mission is to <em>"promote engineering
+            language among engineering students and produce quality designers."</em>
+          </p>
+          <p>
+            We organize hands-on workshops on industry-standard software like SolidWorks, AutoCAD, and ABAQUS,
+            bridging the gap between classroom theory and real-world design. From 3D modeling to FEA simulation,
+            our members explore the full spectrum of computer-aided engineering.
+          </p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-num" data-target="50">0</span><span class="stat-plus">+</span>
+              <span class="stat-label">Members</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" data-target="15">0</span><span class="stat-plus">+</span>
+              <span class="stat-label">Workshops</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" data-target="7">0</span><span class="stat-plus">+</span>
+              <span class="stat-label">Events</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual">
+          <div class="cad-wireframe">
+            <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="60" y="60" width="280" height="280" rx="8" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+              <rect x="100" y="100" width="200" height="200" rx="4" stroke="var(--accent)" stroke-width="1.5" opacity="0.5"/>
+              <line x1="60" y1="60" x2="100" y2="100" stroke="var(--accent)" stroke-width="0.8" opacity="0.3"/>
+              <line x1="340" y1="60" x2="300" y2="100" stroke="var(--accent)" stroke-width="0.8" opacity="0.3"/>
+              <line x1="60" y1="340" x2="100" y2="300" stroke="var(--accent)" stroke-width="0.8" opacity="0.3"/>
+              <line x1="340" y1="340" x2="300" y2="300" stroke="var(--accent)" stroke-width="0.8" opacity="0.3"/>
+              <circle cx="200" cy="200" r="60" stroke="var(--accent)" stroke-width="1.5" opacity="0.6"/>
+              <circle cx="200" cy="200" r="30" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <line x1="200" y1="100" x2="200" y2="300" stroke="var(--accent)" stroke-width="0.6" opacity="0.25" stroke-dasharray="4 4"/>
+              <line x1="100" y1="200" x2="300" y2="200" stroke="var(--accent)" stroke-width="0.6" opacity="0.25" stroke-dasharray="4 4"/>
+              <!-- dimension lines -->
+              <line x1="80" y1="50" x2="320" y2="50" stroke="var(--accent)" stroke-width="0.5" opacity="0.3"/>
+              <line x1="80" y1="46" x2="80" y2="54" stroke="var(--accent)" stroke-width="0.5" opacity="0.3"/>
+              <line x1="320" y1="46" x2="320" y2="54" stroke="var(--accent)" stroke-width="0.5" opacity="0.3"/>
+              <text x="200" y="46" text-anchor="middle" fill="var(--accent)" font-size="8" opacity="0.4" font-family="Space Grotesk">240mm</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PROJECTS / WORK ═══════════════════ -->
+  <section class="section projects" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// OUR WORK</span>
+        <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card" id="project-1">
+          <div class="project-img">
+            <img src="assets/project-turbine.png" alt="Gas Turbine Engine CAD Model" loading="lazy" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">SolidWorks</span>
+            <h3>Gas Turbine Engine</h3>
+            <p>Complete parametric model of a micro gas turbine with CFD-ready geometry.</p>
+          </div>
+        </article>
+        <article class="project-card" id="project-2">
+          <div class="project-img">
+            <img src="assets/project-robot.png" alt="6-DOF Robotic Arm" loading="lazy" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">CATIA V5</span>
+            <h3>6-DOF Robotic Arm</h3>
+            <p>Fully articulated robotic arm with kinematic simulation and stress analysis.</p>
+          </div>
+        </article>
+        <article class="project-card" id="project-3">
+          <div class="project-img">
+            <img src="assets/project-architecture.png" alt="Smart Campus Model" loading="lazy" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">AutoCAD / Revit</span>
+            <h3>Smart Campus Model</h3>
+            <p>BIM-integrated campus design with sustainability analysis and 3D walkthrough.</p>
+          </div>
+        </article>
+        <article class="project-card" id="project-4">
+          <div class="project-img">
+            <img src="assets/project-automotive.png" alt="Suspension System" loading="lazy" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">ANSYS</span>
+            <h3>Suspension FEA</h3>
+            <p>Finite element analysis of a double-wishbone suspension under dynamic loading.</p>
+          </div>
+        </article>
+        <article class="project-card" id="project-5">
+          <div class="project-img">
+            <img src="assets/project-drone.png" alt="Racing Drone Frame" loading="lazy" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">Fusion 360</span>
+            <h3>Racing Drone Frame</h3>
+            <p>Lightweight carbon-fiber frame designed for FPV racing with topology optimization.</p>
+          </div>
+        </article>
+        <article class="project-card" id="project-6">
+          <div class="project-img">
+            <img src="assets/project-bridge.png" alt="Truss Bridge Analysis" loading="lazy" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">ABAQUS</span>
+            <h3>Truss Bridge Analysis</h3>
+            <p>Structural simulation of a Warren truss bridge under various load scenarios.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TEAM ═══════════════════ -->
+  <section class="section team" id="team">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// THE MINDS</span>
+        <h2 class="section-title">Our <span class="accent">Team</span></h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card" id="team-1">
+          <div class="team-avatar">
+            <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="14" stroke="var(--accent)" stroke-width="1.5"/><path d="M12 72c0-15.46 12.54-28 28-28s28 12.54 28 28" stroke="var(--accent)" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Dr. Md. Ashraful Islam</h4>
+          <span class="team-role">Club Moderator</span>
+        </div>
+        <div class="team-card" id="team-2">
+          <div class="team-avatar">
+            <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="14" stroke="var(--accent)" stroke-width="1.5"/><path d="M12 72c0-15.46 12.54-28 28-28s28 12.54 28 28" stroke="var(--accent)" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Shomik Sadman</h4>
+          <span class="team-role">President</span>
+        </div>
+        <div class="team-card" id="team-3">
+          <div class="team-avatar">
+            <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="14" stroke="var(--accent)" stroke-width="1.5"/><path d="M12 72c0-15.46 12.54-28 28-28s28 12.54 28 28" stroke="var(--accent)" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Rafiq Ahmed</h4>
+          <span class="team-role">Vice President</span>
+        </div>
+        <div class="team-card" id="team-4">
+          <div class="team-avatar">
+            <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="14" stroke="var(--accent)" stroke-width="1.5"/><path d="M12 72c0-15.46 12.54-28 28-28s28 12.54 28 28" stroke="var(--accent)" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Nusrat Jahan</h4>
+          <span class="team-role">General Secretary</span>
+        </div>
+        <div class="team-card" id="team-5">
+          <div class="team-avatar">
+            <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="14" stroke="var(--accent)" stroke-width="1.5"/><path d="M12 72c0-15.46 12.54-28 28-28s28 12.54 28 28" stroke="var(--accent)" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Tanvir Hasan</h4>
+          <span class="team-role">Technical Lead</span>
+        </div>
+        <div class="team-card" id="team-6">
+          <div class="team-avatar">
+            <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="14" stroke="var(--accent)" stroke-width="1.5"/><path d="M12 72c0-15.46 12.54-28 28-28s28 12.54 28 28" stroke="var(--accent)" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Fariha Rahman</h4>
+          <span class="team-role">Event Coordinator</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CONTACT / FOOTER ═══════════════════ -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="Cader.png" alt="CADers" class="footer-logo" />
+          <h3>CADers</h3>
+          <p>Computer Aided Designers · KUET</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Quick Links</h4>
+          <a href="#hero">Home</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#team">Team</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Resources</h4>
+          <a href="#">SolidWorks Hub</a>
+          <a href="#">CAD Tutorials</a>
+          <a href="#">Workshop Archive</a>
+        </div>
+        <div class="footer-connect">
+          <h4>Connect</h4>
+          <div class="social-links">
+            <!-- GitHub -->
+            <a href="https://github.com/CADers-KUET" target="_blank" rel="noopener" aria-label="GitHub" class="social-link" id="social-github">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/groups/1449765805192308/" target="_blank" rel="noopener" aria-label="Facebook" class="social-link" id="social-facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link" id="social-linkedin">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <!-- Email -->
+            <a href="mailto:caders@kuet.ac.bd" aria-label="Email" class="social-link" id="social-email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 CADers · Khulna University of Engineering &amp; Technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- GSAP + ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
