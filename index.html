@@ -12,17 +12,6 @@
 </head>
 <body>
 
-  <!-- ═══════════════════ QUOTE INTRO OVERLAY ═══════════════════ -->
-  <div id="quote-overlay" class="quote-overlay">
-    <div class="quote-content">
-      <p class="quote-text" id="quote-text">
-        "Design is not just what it looks like and feels like.<br />
-        Design is how it works."
-      </p>
-      <span class="quote-author" id="quote-author">– Steve Jobs</span>
-    </div>
-  </div>
-
   <!-- ═══════════════════ NAVBAR ═══════════════════ -->
   <nav class="navbar" id="navbar">
     <a href="#" class="nav-logo">
@@ -41,9 +30,8 @@
     </ul>
   </nav>
 
-  <!-- ═══════════════════ HERO / FOLD ANIMATION ═══════════════════ -->
+  <!-- ═══════════════════ HERO ═══════════════════ -->
   <section class="hero" id="hero">
-    <div class="hero-bg-grid"></div>
     <div class="hero-content">
       <h1 class="hero-title" id="hero-title">
         <span class="hero-line">We Are</span>
@@ -52,28 +40,6 @@
       <p class="hero-sub" id="hero-sub">Computer Aided Designers · KUET</p>
     </div>
   </section>
-
-  <!-- Scroll spacer for fold animation -->
-  <div class="fold-spacer" aria-hidden="true"></div>
-
-  <!-- Fold animation scene -->
-  <section class="scene" id="scene" aria-label="Scroll fold animation">
-    <div class="stage">
-      <div class="fold-container" id="fold">
-        <div class="panel panel-left" id="panel-left"></div>
-        <div class="panel panel-center" id="panel-center"></div>
-        <div class="panel panel-right" id="panel-right"></div>
-        <div class="edge-shadow edge-left" aria-hidden="true"></div>
-        <div class="edge-shadow edge-right" aria-hidden="true"></div>
-        <!-- Logo reveal -->
-        <div class="logo-reveal" id="logo-reveal">
-          <img src="Cader.png" alt="CADers Logo" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="fold-spacer-bottom" aria-hidden="true"></div>
 
   <!-- ═══════════════════ ABOUT ═══════════════════ -->
   <section class="section about" id="about">
@@ -310,12 +276,6 @@
     </div>
   </footer>
 
-  <!-- Cursor glow -->
-  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
-
-  <!-- GSAP + ScrollTrigger CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
