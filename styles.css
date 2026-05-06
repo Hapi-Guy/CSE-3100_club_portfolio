@@ -174,3 +174,219 @@ img {
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   SECTIONS – shared
+   ═══════════════════════════════════════════════════════════ */
+.section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: #00c853;
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ABOUT
+   ═══════════════════════════════════════════════════════════ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-text p {
+  color: #9a9ab0;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.about-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #00c853;
+}
+
+.stat-plus {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00c853;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #5a5a70;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.3rem;
+}
+
+/* About visual – club logo */
+.about-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-logo-img {
+  width: 100%;
+  max-width: 280px;
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PROJECTS
+   ═══════════════════════════════════════════════════════════ */
+.projects {
+  background: #111118;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.project-card {
+  background: #16161e;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  border-color: rgba(0, 200, 83, 0.3);
+}
+
+.project-img {
+  height: 220px;
+  overflow: hidden;
+  background: #0a0a0f;
+}
+
+.project-img img {
+  width: 100%;
+  height: 220px;
+}
+
+.project-info {
+  padding: 1.5rem;
+}
+
+.project-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #00c853;
+  background: rgba(0, 200, 83, 0.15);
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  margin-bottom: 0.8rem;
+}
+
+.project-info h3 {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.project-info p {
+  font-size: 0.88rem;
+  color: #9a9ab0;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TEAM
+   ═══════════════════════════════════════════════════════════ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.team-card {
+  background: #16161e;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.team-card:hover {
+  border-color: rgba(0, 200, 83, 0.3);
+}
+
+.team-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.2rem;
+  border-radius: 50%;
+  background: rgba(0, 200, 83, 0.08);
+  border: 1px solid rgba(0, 200, 83, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-initials {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #00c853;
+  letter-spacing: 0.05em;
+}
+
+.team-card h4 {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.team-role {
+  font-size: 0.8rem;
+  color: #00c853;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
