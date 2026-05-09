@@ -1,133 +1,141 @@
-(() => {
-  const scene = document.getElementById("scene");
-  const left = document.getElementById("left");
-  const center = document.getElementById("center");
-  const right = document.getElementById("right");
+// ═══════════════════════════════════════════════════════
+// 1. NAVBAR – Mobile toggle
+// ═══════════════════════════════════════════════════════
+function initNavbar() {
+  var toggle = document.getElementById("nav-toggle");
+  var links = document.getElementById("nav-links");
 
-  if (!scene || !left || !center || !right) return;
+  if (toggle && links) {
+    toggle.addEventListener("click", function () {
+      if (links.className.indexOf("open") === -1) {
+        links.className = links.className + " open";
+      } else {
+        links.className = links.className.replace(" open", "");
+      }
+    });
 
-  const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
-  const normalize = (value, start, end) => (value - start) / (end - start);
-
-  // Smooth interpolation (no sudden jumps)
-  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-  const cfg = {
-    stage1End: 0.38,  // line drawing completes
-    stage2Start: 0.36,
-    leftStagger: 0.06,
-    rightStagger: 0.12
-  };
-
-  let isActive = false;
-  let rafId = null;
-  let lastProgress = -1;
-
-  function cssVarPx(name, fallback) {
-    const raw = getComputedStyle(document.documentElement).getPropertyValue(name);
-    const v = parseFloat(raw);
-    return Number.isFinite(v) ? v : fallback;
-  }
-
-  function getProgress() {
-    const viewportH = window.innerHeight;
-    const total = scene.offsetHeight - viewportH;
-
-    if (total <= 0) {
-      return scene.getBoundingClientRect().top <= 0 ? 1 : 0;
+    // Close menu when a link is clicked
+    var navAnchors = links.querySelectorAll("a");
+    for (var i = 0; i < navAnchors.length; i++) {
+      navAnchors[i].addEventListener("click", function () {
+        links.className = links.className.replace(" open", "");
+      });
     }
-
-    const scrolled = window.scrollY - scene.offsetTop;
-    return clamp(scrolled / total);
   }
+}
 
-  function applyTransforms(progress) {
-    if (progress === lastProgress) return;
-    lastProgress = progress;
+// ═══════════════════════════════════════════════════════
+// 2. ACTIVE LINK TRACKING on scroll
+// ═══════════════════════════════════════════════════════
+function initActiveLink() {
+  var sectionIds = ["hero", "about", "projects", "team", "contact"];
+  var navLinks = document.getElementById("nav-links");
+  if (!navLinks) return;
 
-    const panelWidth = cssVarPx("--panel-width", 140);
-    const lineWidth = cssVarPx("--line-width", 6);
-    const thinScaleX = lineWidth / panelWidth;
+  window.addEventListener("scroll", function () {
+    var scrollPos = window.scrollY + 200;
 
-    // Stage 1: vertical line draws from top -> bottom using scaleY + origin top
-    const stage1 = clamp(normalize(progress, 0, cfg.stage1End));
-    const stage1Eased = easeOutCubic(stage1);
+    for (var i = 0; i < sectionIds.length; i++) {
+      var section = document.getElementById(sectionIds[i]);
+      if (!section) continue;
 
-    // Stage 2: unfold panels with perspective rotateY
-    const stage2 = clamp(normalize(progress, cfg.stage2Start, 1));
-    const stage2Eased = easeOutCubic(stage2);
+      var link = navLinks.querySelector('a[href="#' + sectionIds[i] + '"]');
+      if (!link) continue;
 
-    // Center panel: remains flat; starts as thin line then expands to full width
-    const centerScaleY = stage1Eased;
-    const centerScaleX = thinScaleX + (1 - thinScaleX) * stage2Eased;
+      // Check if scroll position is within this section
+      var sectionTop = section.offsetTop;
+      var sectionHeight = section.offsetHeight;
 
-    center.style.transform = `scaleX(${centerScaleX}) scaleY(${centerScaleY})`;
-    center.style.background = centerScaleX < 0.2
-      ? "var(--line-color)"
-      : "linear-gradient(180deg, #d9f2ff, var(--panel-main))";
+      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        link.className = "active";
+      } else {
+        link.className = "";
+      }
+    }
+  });
+}
 
-    // Left and right fold panels with slight stagger for realism
-    const leftP = clamp(stage2Eased - cfg.leftStagger);
-    const rightP = clamp(stage2Eased - cfg.rightStagger);
+// ═══════════════════════════════════════════════════════
+// 3. SMOOTH SCROLL (for anchor links)
+// ═══════════════════════════════════════════════════════
+function initSmoothScroll() {
+  var allLinks = document.querySelectorAll('a[href^="#"]');
 
-    const leftAngle = -90 + leftP * 90;   // -90 -> 0
-    const rightAngle = 90 - rightP * 90;  // 90 -> 0
+  for (var i = 0; i < allLinks.length; i++) {
+    allLinks[i].addEventListener("click", function (e) {
+      var href = this.getAttribute("href");
+      if (href === "#") return;
 
-    left.style.transform = `rotateY(${leftAngle}deg)`;
-    right.style.transform = `rotateY(${rightAngle}deg)`;
+      var target = document.querySelector(href);
+      if (!target) return;
 
-    // Optional depth/shadow + tiny trapezoid effect via clip-path
-    const leftShadow = 0.08 + 0.16 * leftP;
-    const rightShadow = 0.08 + 0.16 * rightP;
+      e.preventDefault();
 
-    left.style.boxShadow = `${-6 * (1 - leftP)}px 10px 22px rgba(10, 20, 40, ${leftShadow})`;
-    right.style.boxShadow = `${6 * (1 - rightP)}px 10px 22px rgba(10, 20, 40, ${rightShadow})`;
+      var offset = 72; // navbar height
+      var targetTop = target.offsetTop - offset;
 
-    const skewL = (1 - leftP) * 1.2;
-    const skewR = (1 - rightP) * 1.2;
-
-    left.style.clipPath = `polygon(0 0, 100% ${skewL}%, 100% ${100 - skewL}%, 0 100%)`;
-    right.style.clipPath = `polygon(0 ${skewR}%, 100% 0, 100% 100%, 0 ${100 - skewR}%)`;
+      window.scrollTo({
+        top: targetTop,
+        behavior: "smooth"
+      });
+    });
   }
+}
 
-  function tick() {
-    rafId = requestAnimationFrame(() => {
-      applyTransforms(getProgress());
-      if (isActive) tick();
+// ═══════════════════════════════════════════════════════
+// 4. STAT NUMBERS – Set values
+// ═══════════════════════════════════════════════════════
+function initStats() {
+  var statData = [
+    { id: "stat-members", value: 50 },
+    { id: "stat-workshops", value: 15 },
+    { id: "stat-events", value: 7 }
+  ];
+
+  for (var i = 0; i < statData.length; i++) {
+    var el = document.getElementById(statData[i].id);
+    if (el) {
+      el.innerHTML = statData[i].value;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// 5. PROJECT CARD HOVER EFFECTS (using JS for interactivity)
+// ═══════════════════════════════════════════════════════
+function initCardHover() {
+  var cards = document.querySelectorAll(".project-card");
+
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].addEventListener("mouseenter", function () {
+      this.style.borderColor = "rgba(0, 200, 83, 0.3)";
+    });
+
+    cards[i].addEventListener("mouseleave", function () {
+      this.style.borderColor = "rgba(255, 255, 255, 0.04)";
     });
   }
 
-  function start() {
-    if (isActive) return;
-    isActive = true;
-    tick();
+  var teamCards = document.querySelectorAll(".team-card");
+
+  for (var j = 0; j < teamCards.length; j++) {
+    teamCards[j].addEventListener("mouseenter", function () {
+      this.style.borderColor = "rgba(0, 200, 83, 0.3)";
+    });
+
+    teamCards[j].addEventListener("mouseleave", function () {
+      this.style.borderColor = "rgba(255, 255, 255, 0.04)";
+    });
   }
+}
 
-  function stop() {
-    isActive = false;
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = null;
-  }
-
-  // IntersectionObserver: preferred, reduces work when scene is offscreen
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) start();
-        else stop();
-      });
-    },
-    { threshold: 0.01 }
-  );
-
-  observer.observe(scene);
-
-  // Initial state
-  applyTransforms(getProgress());
-
-  // Keep in sync on viewport changes
-  window.addEventListener("resize", () => applyTransforms(getProgress()), { passive: true });
-  window.addEventListener("scroll", () => {
-    if (!isActive) start();
-  }, { passive: true });
-})();
+// ═══════════════════════════════════════════════════════
+// INIT – Run when page loads
+// ═══════════════════════════════════════════════════════
+window.addEventListener("load", function () {
+  initNavbar();
+  initActiveLink();
+  initSmoothScroll();
+  initStats();
+  initCardHover();
+});
