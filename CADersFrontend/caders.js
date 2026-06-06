@@ -130,6 +130,90 @@ function initCardHover() {
 }
 
 // ═══════════════════════════════════════════════════════
+// 6. CONTACT FORM – Send message to backend via fetch()
+// ═══════════════════════════════════════════════════════
+function initContactForm() {
+  // Grab the <form> element by its id
+  var form = document.getElementById("contact-form");
+  if (!form) return; // Safety check: exit if no form found
+
+  // Listen for the form's "submit" event
+  form.addEventListener("submit", function (e) {
+    // Prevent the browser from reloading the page
+    e.preventDefault();
+
+    // ── Grab each input element ──
+    var nameInput    = document.getElementById("contact-name");
+    var emailInput   = document.getElementById("contact-email");
+    var messageInput = document.getElementById("contact-message");
+    var submitBtn    = document.getElementById("contact-submit");
+    var btnText      = document.getElementById("btn-text");
+    var btnLoading   = document.getElementById("btn-loading");
+    var statusEl     = document.getElementById("form-status");
+
+    // ── Switch button to loading state ──
+    submitBtn.disabled       = true;
+    btnText.style.display    = "none";
+    btnLoading.style.display = "inline";
+    statusEl.innerHTML       = "";
+    statusEl.className       = "form-status"; // reset any success/error class
+
+    // ── Build a plain JS object with the form values ──
+    var formData = {
+      name:    nameInput.value,
+      email:   emailInput.value,
+      message: messageInput.value
+    };
+
+    // ─────────────────────────────────────────────────────────
+    // IMPORTANT: Change this URL to match the port that
+    // Visual Studio assigns to your ASP.NET backend.
+    // You can find the port in:
+    //   Project Properties > Debug > App URL
+    // or in the browser URL bar when the backend starts.
+    // ─────────────────────────────────────────────────────────
+    var apiUrl = "http://localhost:61300/api/Contact";
+
+    // ── Send the POST request using fetch() ──
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"  // tell the server we're sending JSON
+      },
+      body: JSON.stringify(formData)          // convert our object to a JSON string
+    })
+    .then(function (response) {
+      // Check if the server returned an error status code
+      if (!response.ok) {
+        throw new Error("Server returned status " + response.status);
+      }
+      return response.json(); // parse the JSON body
+    })
+    .then(function (data) {
+      // ── SUCCESS: update the status message and alert the user ──
+      statusEl.innerHTML  = "\u2713 Message sent successfully!";
+      statusEl.className  = "form-status success";
+      alert("Message sent successfully! Thank you for reaching out.");
+
+      // Clear the form fields
+      form.reset();
+    })
+    .catch(function (error) {
+      // ── ERROR: show what went wrong ──
+      statusEl.innerHTML  = "\u2717 Failed to send. Please try again.";
+      statusEl.className  = "form-status error";
+      alert("Error: " + error.message);
+    })
+    .finally(function () {
+      // ── Always re-enable the button whether it succeeded or failed ──
+      submitBtn.disabled       = false;
+      btnText.style.display    = "inline";
+      btnLoading.style.display = "none";
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════
 // INIT – Run when page loads
 // ═══════════════════════════════════════════════════════
 window.addEventListener("load", function () {
@@ -138,4 +222,5 @@ window.addEventListener("load", function () {
   initSmoothScroll();
   initStats();
   initCardHover();
+  initContactForm();
 });
