@@ -23,6 +23,7 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li id="nav-admin-item" style="display:none;"><a href="admin.html" id="nav-admin-link">Admin</a></li>
     </ul>
   </div>
 
@@ -85,67 +86,8 @@
         <span class="section-tag">// OUR WORK</span>
         <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
       </div>
-      <div class="projects-grid">
-        <div class="project-card" id="project-1">
-          <div class="project-img">
-            <img src="assets/project-turbine.png" alt="Gas Turbine Engine CAD Model" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">SolidWorks</span>
-            <h3>Gas Turbine Engine</h3>
-            <p>Complete parametric model of a micro gas turbine with CFD-ready geometry.</p>
-          </div>
-        </div>
-        <div class="project-card" id="project-2">
-          <div class="project-img">
-            <img src="assets/project-robot.png" alt="6-DOF Robotic Arm" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">CATIA V5</span>
-            <h3>6-DOF Robotic Arm</h3>
-            <p>Fully articulated robotic arm with kinematic simulation and stress analysis.</p>
-          </div>
-        </div>
-        <div class="project-card" id="project-3">
-          <div class="project-img">
-            <img src="assets/project-architecture.png" alt="Smart Campus Model" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">AutoCAD / Revit</span>
-            <h3>Smart Campus Model</h3>
-            <p>BIM-integrated campus design with sustainability analysis and 3D walkthrough.</p>
-          </div>
-        </div>
-        <div class="project-card" id="project-4">
-          <div class="project-img">
-            <img src="assets/project-automotive.png" alt="Suspension System" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">ANSYS</span>
-            <h3>Suspension FEA</h3>
-            <p>Finite element analysis of a double-wishbone suspension under dynamic loading.</p>
-          </div>
-        </div>
-        <div class="project-card" id="project-5">
-          <div class="project-img">
-            <img src="assets/project-drone.png" alt="Racing Drone Frame" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">Fusion 360</span>
-            <h3>Racing Drone Frame</h3>
-            <p>Lightweight carbon-fiber frame designed for FPV racing with topology optimization.</p>
-          </div>
-        </div>
-        <div class="project-card" id="project-6">
-          <div class="project-img">
-            <img src="assets/project-bridge.png" alt="Truss Bridge Analysis" />
-          </div>
-          <div class="project-info">
-            <span class="project-tag">ABAQUS</span>
-            <h3>Truss Bridge Analysis</h3>
-            <p>Structural simulation of a Warren truss bridge under various load scenarios.</p>
-          </div>
-        </div>
+      <div class="projects-grid" id="projects-grid">
+        <!-- Projects loaded dynamically from API -->
       </div>
     </div>
   </div>

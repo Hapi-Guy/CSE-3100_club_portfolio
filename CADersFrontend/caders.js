@@ -1,3 +1,5 @@
+var API_BASE = "https://localhost:44322";
+
 // ═══════════════════════════════════════════════════════
 // 1. NAVBAR – Mobile toggle
 // ═══════════════════════════════════════════════════════
@@ -172,7 +174,7 @@ function initContactForm() {
     //   Project Properties > Debug > App URL
     // or in the browser URL bar when the backend starts.
     // ─────────────────────────────────────────────────────────
-    var apiUrl = "http://localhost:61300/api/Contact";
+    var apiUrl = API_BASE + "/api/Contact";
 
     // ── Send the POST request using fetch() ──
     fetch(apiUrl, {
@@ -214,6 +216,73 @@ function initContactForm() {
 }
 
 // ═══════════════════════════════════════════════════════
+// 7. LOAD PROJECTS – Fetch from API and render cards
+// ═══════════════════════════════════════════════════════
+function loadProjects() {
+  var apiUrl = API_BASE + "/api/projects";
+  var grid = document.getElementById("projects-grid");
+  if (!grid) return;
+
+  fetch(apiUrl)
+  .then(function (response) {
+    if (!response.ok) throw new Error("Failed to load projects");
+    return response.json();
+  })
+  .then(function (projects) {
+    if (projects.length === 0) {
+      grid.innerHTML = '<p style="color:#9a9ab0;text-align:center;padding:2rem;">No projects yet.</p>';
+      return;
+    }
+
+    var html = "";
+    for (var i = 0; i < projects.length; i++) {
+      var p = projects[i];
+      html += '<div class="project-card" id="project-' + p.id + '">';
+      html += '  <div class="project-img">';
+      if (p.imageUrl) {
+        html += '    <img src="' + p.imageUrl + '" alt="' + p.title + '" />';
+      }
+      html += '  </div>';
+      html += '  <div class="project-info">';
+      html += '    <h3>' + p.title + '</h3>';
+      html += '    <p>' + p.description + '</p>';
+      html += '  </div>';
+      html += '</div>';
+    }
+    grid.innerHTML = html;
+
+    // Re-attach hover effects to new cards
+    initCardHover();
+  })
+  .catch(function (err) {
+    console.error("Error loading projects:", err);
+    grid.innerHTML = '<p style="color:#9a9ab0;text-align:center;padding:2rem;">Failed to load projects.</p>';
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// 8. CHECK ADMIN STATUS – Show Admin link for authenticated admins
+// ═══════════════════════════════════════════════════════
+function checkAdminStatus() {
+  fetch(API_BASE + "/api/auth/status", {
+    method: "GET",
+    credentials: "include"
+  })
+  .then(function (response) { return response.json(); })
+  .then(function (data) {
+    if (data.authenticated && data.role === "Admin") {
+      var adminItem = document.getElementById("nav-admin-item");
+      if (adminItem) {
+        adminItem.style.display = "";
+      }
+    }
+  })
+  .catch(function () {
+    // Not logged in or backend unreachable – admin link stays hidden
+  });
+}
+
+// ═══════════════════════════════════════════════════════
 // INIT – Run when page loads
 // ═══════════════════════════════════════════════════════
 window.addEventListener("load", function () {
@@ -223,4 +292,6 @@ window.addEventListener("load", function () {
   initStats();
   initCardHover();
   initContactForm();
+  loadProjects();
+  checkAdminStatus();
 });

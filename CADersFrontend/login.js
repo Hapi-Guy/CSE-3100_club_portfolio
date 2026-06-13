@@ -100,7 +100,8 @@ function initLoginForm() {
       return response.json();
     })
     .then(function (data) {
-      // Success – redirect to admin dashboard
+      // Success – save auth state to localStorage then redirect
+      localStorage.setItem("cadersAdmin", data.username || loginData.username);
       window.location.href = "admin.html";
     })
     .catch(function (error) {
@@ -117,19 +118,10 @@ function initLoginForm() {
 // ─── Check if already logged in ──────────────────────
 
 function checkExistingSession() {
-  fetch(API_BASE + "/api/auth/status", {
-    method: "GET",
-    credentials: "include"
-  })
-  .then(function (response) { return response.json(); })
-  .then(function (data) {
-    if (data.authenticated) {
-      window.location.href = "admin.html";
-    }
-  })
-  .catch(function () {
-    // Not logged in, stay on login page
-  });
+  // If already logged in (localStorage flag), skip straight to admin
+  if (localStorage.getItem("cadersAdmin")) {
+    window.location.href = "admin.html";
+  }
 }
 
 // ─── Init ────────────────────────────────────────────

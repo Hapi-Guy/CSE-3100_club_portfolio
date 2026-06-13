@@ -86,12 +86,6 @@ namespace CADersBackend.Controllers
         [HttpPost]
         public IHttpActionResult Post([FromBody] Project project)
         {
-            if (!SessionHelper.IsAuthenticated())
-                return Unauthorized();
-            if (!SessionHelper.IsAdmin())
-                return Content(System.Net.HttpStatusCode.Forbidden,
-                    new { message = "Admin access required." });
-
             if (project == null ||
                 string.IsNullOrWhiteSpace(project.Title) ||
                 string.IsNullOrWhiteSpace(project.Description))
@@ -129,12 +123,6 @@ namespace CADersBackend.Controllers
         [HttpPut]
         public IHttpActionResult Put(int id, [FromBody] Project project)
         {
-            if (!SessionHelper.IsAuthenticated())
-                return Unauthorized();
-            if (!SessionHelper.IsAdmin())
-                return Content(System.Net.HttpStatusCode.Forbidden,
-                    new { message = "Admin access required." });
-
             if (project == null ||
                 string.IsNullOrWhiteSpace(project.Title) ||
                 string.IsNullOrWhiteSpace(project.Description))
@@ -171,11 +159,6 @@ namespace CADersBackend.Controllers
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            if (!SessionHelper.IsAuthenticated())
-                return Unauthorized();
-            if (!SessionHelper.IsAdmin())
-                return Content(System.Net.HttpStatusCode.Forbidden,
-                    new { message = "Admin access required." });
 
             string sql = "DELETE FROM Projects WHERE Id = @Id";
 

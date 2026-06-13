@@ -5,11 +5,17 @@
 var API_BASE = "https://localhost:44322";
 
 // ─────────────────────────────────────────────────────────
-// 1. AUTH CHECK – Removed. Admin panel is open access.
+// 1. AUTH CHECK – Redirect to login if no session in localStorage
 // ─────────────────────────────────────────────────────────
 function checkAuth() {
-  // Authentication removed – admin panel accessible directly by URL
-  return Promise.resolve({ authenticated: true, username: "Admin", role: "Admin", visitCount: 0 });
+  var adminUser = localStorage.getItem("cadersAdmin");
+  if (!adminUser) {
+    // Not logged in – hide content immediately and redirect
+    document.body.style.visibility = "hidden";
+    window.location.href = "login.html";
+    return false;
+  }
+  return adminUser; // returns the username string
 }
 
 // ─────────────────────────────────────────────────────────
@@ -55,16 +61,9 @@ function initLogout() {
   if (!btn) return;
 
   btn.addEventListener("click", function () {
-    fetch(API_BASE + "/api/auth/logout", {
-      method: "POST",
-      credentials: "include"
-    })
-    .then(function () {
-      window.location.href = "login.html";
-    })
-    .catch(function () {
-      window.location.href = "login.html";
-    });
+    // Clear localStorage auth flag then go to login
+    localStorage.removeItem("cadersAdmin");
+    window.location.href = "login.html";
   });
 }
 
@@ -484,6 +483,19 @@ function truncate(str, maxLen) {
 // 8. INIT
 // ─────────────────────────────────────────────────────────
 window.addEventListener("load", function () {
+  // Auth gate: immediately redirect to login if no session
+  var adminUser = checkAuth();
+  if (!adminUser) return; // checkAuth already redirected
+
+  // Show username in sidebar from localStorage
+  var sidebarUsername = document.getElementById("sidebar-username");
+  if (sidebarUsername) sidebarUsername.textContent = adminUser;
+  var sidebarRole = document.getElementById("sidebar-role");
+  if (sidebarRole) sidebarRole.textContent = "Admin";
+
+  // Restore page visibility (in case it was hidden during redirect)
+  document.body.style.visibility = "";
+
   initNavigation();
   initLogout();
   initProjectSearch();
