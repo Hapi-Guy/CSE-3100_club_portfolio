@@ -1,4 +1,5 @@
 using System.Web.Http;
+using Newtonsoft.Json.Serialization;
 
 namespace CADersBackend
 {
@@ -6,8 +7,10 @@ namespace CADersBackend
     {
         public static void Register(HttpConfiguration config)
         {
-            // CORS is configured in Web.config via custom headers
-            // (Access-Control-Allow-Origin, Methods, Headers)
+            // Serialize JSON with camelCase property names so JavaScript can access
+            // p.id, p.title, m.name etc. instead of p.Id, p.Title, m.Name
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>CADers – Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Admin dashboard for managing CADers Club projects and contact messages." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="admin-sidebar">
+      <a href="caders.html" class="sidebar-brand">
+        <img src="Cader.png" alt="CADers" />
+        <span>CADers</span>
+      </a>
+
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#" class="active" data-page="dashboard" id="nav-dashboard">
+            <span class="nav-icon">📊</span> Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="#" data-page="projects" id="nav-projects">
+            <span class="nav-icon">🗂️</span> Projects
+          </a>
+        </li>
+        <li>
+          <a href="#" data-page="messages" id="nav-messages">
+            <span class="nav-icon">✉️</span> Messages
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          Signed in as <strong id="sidebar-username">—</strong>
+          <span class="user-role" id="sidebar-role">—</span>
+        </div>
+        <button class="btn-logout" id="btn-logout">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="admin-main">
+
+      <!-- Session Visit Banner -->
+      <div class="session-banner" id="session-banner">
+        <span class="session-icon">🔑</span>
+        <span>Pages Visited This Session: <strong id="visit-count">0</strong></span>
+      </div>
+
+      <!-- ─── DASHBOARD PAGE ─── -->
+      <div class="admin-page active" id="page-dashboard">
+        <div class="page-header">
+          <h2>Dashboard</h2>
+          <p>Overview of your CADers portfolio</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-icon">👤</div>
+            <div class="stat-card-value" id="dash-username">—</div>
+            <div class="stat-card-label">Logged In As</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">🛡️</div>
+            <div class="stat-card-value" id="dash-role">—</div>
+            <div class="stat-card-label">User Role</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">🗂️</div>
+            <div class="stat-card-value" id="dash-projects">0</div>
+            <div class="stat-card-label">Total Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">✉️</div>
+            <div class="stat-card-value" id="dash-messages">0</div>
+            <div class="stat-card-label">Contact Messages</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">📄</div>
+            <div class="stat-card-value" id="dash-visits">0</div>
+            <div class="stat-card-label">Session Visits</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── PROJECTS PAGE ─── -->
+      <div class="admin-page" id="page-projects">
+        <div class="page-header">
+          <h2>Manage Projects</h2>
+          <p>Create, edit, and delete portfolio projects</p>
+        </div>
+        <div class="table-toolbar">
+          <input type="text" class="search-input" id="project-search"
+                 placeholder="Search projects..." />
+          <button class="btn-primary" id="btn-add-project">+ Add Project</button>
+        </div>
+        <table class="data-table" id="projects-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Image URL</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="projects-tbody">
+            <tr><td colspan="5" class="empty-state">Loading projects...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ─── MESSAGES PAGE ─── -->
+      <div class="admin-page" id="page-messages">
+        <div class="page-header">
+          <h2>Contact Messages</h2>
+          <p>View and manage incoming contact messages</p>
+        </div>
+        <div class="table-toolbar">
+          <input type="text" class="search-input" id="message-search"
+                 placeholder="Search by name, email, or message..." />
+          <span class="message-count" id="message-count">0 messages</span>
+        </div>
+        <div class="table-responsive" id="messages-table-wrap">
+          <table class="data-table" id="messages-table">
+            <thead>
+              <tr>
+                <th class="col-id">ID</th>
+                <th class="col-name">Name</th>
+                <th class="col-email">Email</th>
+                <th class="col-message">Message</th>
+                <th class="col-date">Submitted</th>
+                <th class="col-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="messages-tbody">
+              <tr><td colspan="6" class="empty-state">Loading messages...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ═══ PROJECT MODAL ═══ -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal">
+      <h3 id="project-modal-title">Add Project</h3>
+      <form id="project-form">
+        <input type="hidden" id="project-edit-id" value="" />
+        <div class="form-group">
+          <label for="project-title">Title</label>
+          <input type="text" id="project-title" required placeholder="Project title" />
+        </div>
+        <div class="form-group">
+          <label for="project-description">Description</label>
+          <textarea id="project-description" rows="4" required
+                    placeholder="Project description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="project-image">Image URL (optional)</label>
+          <input type="text" id="project-image" placeholder="e.g. assets/project-photo.png" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="btn-cancel-project">Cancel</button>
+          <button type="submit" class="btn-primary" id="btn-save-project">Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══ MESSAGE VIEW MODAL ═══ -->
+  <div class="modal-overlay" id="message-modal">
+    <div class="modal message-view-modal">
+      <div class="message-modal-header">
+        <h3>Message Details</h3>
+        <button type="button" class="modal-close-btn" id="btn-close-message" title="Close">✕</button>
+      </div>
+      <div class="message-meta">
+        <div class="meta-row">
+          <span class="meta-label">From</span>
+          <span class="meta-value" id="modal-msg-name"></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Email</span>
+          <span class="meta-value" id="modal-msg-email"></span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Sent</span>
+          <span class="meta-value" id="modal-msg-date"></span>
+        </div>
+      </div>
+      <div class="message-body" id="modal-msg-body"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="btn-dismiss-message">Close</button>
+        <button type="button" class="btn-action btn-danger" id="btn-delete-from-modal">Delete Message</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

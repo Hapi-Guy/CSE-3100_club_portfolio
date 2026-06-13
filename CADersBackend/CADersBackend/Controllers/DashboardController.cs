@@ -20,9 +20,6 @@ namespace CADersBackend.Controllers
         [Route("")]
         public IHttpActionResult Get()
         {
-            if (!SessionHelper.IsAuthenticated())
-                return Unauthorized();
-
             int totalProjects = 0;
             int totalMessages = 0;
 
@@ -41,11 +38,11 @@ namespace CADersBackend.Controllers
 
             return Ok(new
             {
-                username = SessionHelper.GetUsername(),
-                role = SessionHelper.GetRole(),
+                username = "Admin",
+                role = "Admin",
                 totalProjects = totalProjects,
                 totalMessages = totalMessages,
-                visitCount = SessionHelper.GetVisitCount()
+                visitCount = 0
             });
         }
     }

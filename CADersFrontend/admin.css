@@ -1,0 +1,649 @@
+/* ═══════════════════════════════════════════════════════════
+   ADMIN DASHBOARD – Styles
+   Matches the existing CADers dark theme
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Layout ──────────────────────────────────────────── */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ─── Sidebar ─────────────────────────────────────────── */
+.admin-sidebar {
+  width: 260px;
+  background: #111118;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0 1.5rem;
+  margin-bottom: 2.5rem;
+  text-decoration: none;
+}
+
+.sidebar-brand img {
+  width: 36px;
+  height: 36px;
+}
+
+.sidebar-brand span {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #e8e8f0;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.sidebar-nav li {
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #9a9ab0;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.sidebar-nav a:hover {
+  color: #e8e8f0;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sidebar-nav a.active {
+  color: #00c853;
+  background: rgba(0, 200, 83, 0.06);
+  border-left-color: #00c853;
+}
+
+.sidebar-nav .nav-icon {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.sidebar-user {
+  font-size: 0.82rem;
+  color: #9a9ab0;
+  margin-bottom: 0.8rem;
+}
+
+.sidebar-user strong {
+  color: #e8e8f0;
+  font-weight: 600;
+}
+
+.sidebar-user .user-role {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #00c853;
+  background: rgba(0, 200, 83, 0.15);
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+  margin-left: 0.4rem;
+}
+
+.btn-logout {
+  width: 100%;
+  padding: 0.6rem;
+  background: transparent;
+  color: #9a9ab0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-logout:hover {
+  color: #ff5252;
+  border-color: rgba(255, 82, 82, 0.3);
+  background: rgba(255, 82, 82, 0.06);
+}
+
+/* ─── Main Content ────────────────────────────────────── */
+.admin-main {
+  flex: 1;
+  margin-left: 260px;
+  padding: 2.5rem;
+}
+
+.admin-page {
+  display: none;
+}
+
+.admin-page.active {
+  display: block;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h2 {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #e8e8f0;
+  margin-bottom: 0.3rem;
+}
+
+.page-header p {
+  font-size: 0.88rem;
+  color: #9a9ab0;
+}
+
+/* ─── Dashboard Cards ─────────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #16161e;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.stat-card .stat-card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.stat-card .stat-card-value {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00c853;
+  margin-bottom: 0.2rem;
+}
+
+.stat-card .stat-card-label {
+  font-size: 0.8rem;
+  color: #9a9ab0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ─── Table Styles ────────────────────────────────────── */
+.table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  padding: 0.6rem 1rem;
+  background: #16161e;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  color: #e8e8f0;
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  min-width: 250px;
+}
+
+.search-input:focus {
+  border-color: #00c853;
+  box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.1);
+}
+
+.search-input::placeholder {
+  color: #5a5a70;
+}
+
+.btn-primary {
+  padding: 0.6rem 1.2rem;
+  background: #00c853;
+  color: #0a0a0f;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: #00a844;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #16161e;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.data-table th {
+  background: #111118;
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9a9ab0;
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.data-table td {
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+  color: #e8e8f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tr:hover td {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.btn-action {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  background: transparent;
+  color: #9a9ab0;
+  font-size: 0.78rem;
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  cursor: pointer;
+  margin-right: 0.4rem;
+  transition: all 0.15s ease;
+}
+
+.btn-action:hover {
+  color: #00c853;
+  border-color: rgba(0, 200, 83, 0.3);
+}
+
+.btn-action.btn-danger:hover {
+  color: #ff5252;
+  border-color: rgba(255, 82, 82, 0.3);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #5a5a70;
+  font-size: 0.9rem;
+}
+
+/* ─── Modal ───────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  display: none;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: #16161e;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal h3 {
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #e8e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.modal .form-group {
+  margin-bottom: 1.2rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.btn-secondary {
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  color: #9a9ab0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  font-family: 'Outfit', Arial, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-secondary:hover {
+  color: #e8e8f0;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Session Info Banner ─────────────────────────────── */
+.session-banner {
+  background: rgba(0, 200, 83, 0.06);
+  border: 1px solid rgba(0, 200, 83, 0.15);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #9a9ab0;
+}
+
+.session-banner .session-icon {
+  font-size: 1.3rem;
+}
+
+.session-banner strong {
+  color: #00c853;
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .admin-sidebar {
+    width: 220px;
+  }
+  .admin-main {
+    margin-left: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    position: relative;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .admin-main {
+    margin-left: 0;
+  }
+  .admin-layout {
+    flex-direction: column;
+  }
+  .sidebar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+    gap: 0.25rem;
+  }
+  .sidebar-nav a {
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.5rem 1rem;
+  }
+  .sidebar-nav a.active {
+    border-bottom-color: #00c853;
+    border-left-color: transparent;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ENHANCED MESSAGES TABLE & MODAL
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Message Count Badge ────────────────────────────── */
+.message-count {
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #9a9ab0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* ─── Responsive Table Wrapper ───────────────────────── */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.table-responsive .data-table {
+  border: none;
+  border-radius: 0;
+}
+
+/* ─── Column Widths ──────────────────────────────────── */
+.col-id      { width: 60px; }
+.col-name    { width: 140px; }
+.col-email   { width: 180px; }
+.col-message { min-width: 200px; }
+.col-date    { width: 120px; }
+.col-actions { width: 150px; white-space: nowrap; }
+
+/* ─── Message Row Enhancements ───────────────────────── */
+.msg-row {
+  transition: background 0.15s ease;
+}
+
+.msg-row:hover td {
+  background: rgba(0, 200, 83, 0.02) !important;
+}
+
+.msg-sender-name {
+  font-weight: 600;
+  color: #e8e8f0;
+}
+
+.msg-email-text {
+  color: #9a9ab0;
+  font-size: 0.84rem;
+}
+
+.msg-preview {
+  color: #b0b0c5;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.msg-time {
+  font-size: 0.8rem;
+  color: #7a7a90;
+  cursor: default;
+}
+
+/* ─── View Button ────────────────────────────────────── */
+.btn-view {
+  color: #9a9ab0;
+}
+
+.btn-view:hover {
+  color: #00c853;
+  border-color: rgba(0, 200, 83, 0.3);
+  background: rgba(0, 200, 83, 0.06);
+}
+
+/* ─── Empty State with Icon ──────────────────────────── */
+.empty-state-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  opacity: 0.5;
+}
+
+/* ─── Message View Modal ─────────────────────────────── */
+.message-view-modal {
+  max-width: 560px;
+}
+
+.message-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.message-modal-header h3 {
+  margin-bottom: 0;
+}
+
+.modal-close-btn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #9a9ab0;
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.modal-close-btn:hover {
+  color: #ff5252;
+  border-color: rgba(255, 82, 82, 0.3);
+  background: rgba(255, 82, 82, 0.06);
+}
+
+.message-meta {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  padding: 0.35rem 0;
+}
+
+.meta-row:not(:last-child) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.meta-label {
+  width: 60px;
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #7a7a90;
+}
+
+.meta-value {
+  font-size: 0.88rem;
+  color: #e8e8f0;
+  word-break: break-word;
+}
+
+.message-body {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  font-size: 0.92rem;
+  color: #d0d0e0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 0.5rem;
+}
+
+/* Delete button in modal */
+.modal-actions .btn-danger {
+  color: #ff5252;
+  border-color: rgba(255, 82, 82, 0.3);
+  background: rgba(255, 82, 82, 0.06);
+  padding: 0.5rem 1rem;
+  font-size: 0.82rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.modal-actions .btn-danger:hover {
+  background: rgba(255, 82, 82, 0.15);
+  border-color: rgba(255, 82, 82, 0.5);
+}
+
